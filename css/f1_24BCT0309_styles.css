@@ -256,6 +256,7 @@ input[aria-invalid="true"] { border-color: var(--bad); }
   line-height: 1.2;
 }
 .btn:hover { background: var(--surface-2); }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.08); }
