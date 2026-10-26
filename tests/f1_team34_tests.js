@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Protocol Lab - logic tests.  Run with:  node tests/f1_24BCT0309_tests.js
+   Protocol Lab - logic tests.  Run with:  node tests/f1_team34_tests.js
    Only the plain-logic parts of each tab are tested here (no browser needed).
    A tiny home-made test runner keeps the project free of dependencies.
    ========================================================================== */
@@ -8,7 +8,7 @@ const path = require('path');
 const assert = require('assert');
 const jsDir = path.join(__dirname, '..', 'js');
 
-require(path.join(jsDir, 'f1_24BCT0309_core.js'));
+require(path.join(jsDir, 'f1_team34_core.js'));
 const CN = globalThis.CN;
 
 let passed = 0;
@@ -22,7 +22,7 @@ const close = (a, b, tol, msg) => assert.ok(Math.abs(a - b) <= tol, (msg || '') 
 
 /* ---------------------------------------------------------------------- */
 console.log('\nError detection');
-require(path.join(jsDir, 'f1_24BCT0309_error_detection.js'));
+require(path.join(jsDir, 'f1_team34_error_detection.js'));
 const ED = CN.errorDetection;
 
 test('Hamming: parity bit count follows 2^r >= m + r + 1', () => {
@@ -182,11 +182,11 @@ test('Monte Carlo: parity never catches even-sized errors; CRC-16 catches every 
 /* ---------------------------------------------------------------------- */
 const extra = process.argv.slice(2); // allow: node tests/... flow mac tcp qos
 ['flow_control', 'multiple_access', 'tcp_congestion', 'queuing_qos'].forEach((name) => {
-  const file = path.join(jsDir, 'f1_24BCT0309_' + name + '.js');
+  const file = path.join(jsDir, 'f1_team34_' + name + '.js');
   if (require('fs').existsSync(file)) {
     console.log('\n' + name.replace('_', ' '));
     require(file);
-    const suite = path.join(__dirname, 'f1_24BCT0309_tests_' + name + '.js');
+    const suite = path.join(__dirname, 'f1_team34_tests_' + name + '.js');
     if (require('fs').existsSync(suite)) require(suite)({ test, assert, close, CN });
   }
 });

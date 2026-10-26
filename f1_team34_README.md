@@ -1,11 +1,11 @@
 # Protocol Lab: Computer Networks project
 
-Roll no. 24BCT0309. A browser dashboard of interactive experiments that follow the Computer Networks syllabus.
+Team 34. A browser dashboard of interactive experiments that follow the Computer Networks syllabus.
 Plain HTML, CSS and JavaScript. No frameworks, no build step, no server, no internet needed.
 
 ## Run it
 
-Open `f1_24BCT0309_index.html` in any modern browser (double click it). That is all.
+Open `f1_team34_index.html` in any modern browser (double click it). That is all.
 Fonts load from Google Fonts when online and fall back to system fonts otherwise.
 
 ## What is inside
@@ -19,24 +19,24 @@ Fonts load from Google Fonts when online and fall back to system fonts otherwise
 | Queuing and QoS | Unit 6 | FIFO, priority, WFQ; delay, jitter, loss, throughput for a voice call |
 
 Units 1, 2, 4, 5 and 7 have no lab. The Overview page shows the full coverage table, and
-`docs/f1_24BCT0309_syllabus_mapping.md` repeats it with the model assumptions.
+`docs/f1_team34_syllabus_mapping.md` repeats it with the model assumptions.
 
 ## Files
 
-All files are named `f1_24BCT0309_<what it is>`.
+All files are named `f1_team34_<what it is>`.
 
 ```
-f1_24BCT0309_index.html                  page shell, loads everything
-css/f1_24BCT0309_styles.css              theme, layout
-js/f1_24BCT0309_core.js                  helpers, widgets, theme, router, random numbers
-js/f1_24BCT0309_charts.js                small canvas chart library
-js/f1_24BCT0309_overview.js              landing page and coverage table
-js/f1_24BCT0309_error_detection.js       Hamming, CRC, checksum
-js/f1_24BCT0309_flow_control.js          ARQ simulator
-js/f1_24BCT0309_multiple_access.js       ALOHA / CSMA simulator
-js/f1_24BCT0309_tcp_congestion.js        Tahoe, Reno, bottleneck model
-js/f1_24BCT0309_queuing_qos.js           queuing disciplines
-tests/f1_24BCT0309_tests*.js             automated tests
+f1_team34_index.html                  page shell, loads everything
+css/f1_team34_styles.css              theme, layout
+js/f1_team34_core.js                  helpers, widgets, theme, router, random numbers
+js/f1_team34_charts.js                small canvas chart library
+js/f1_team34_overview.js              landing page and coverage table
+js/f1_team34_error_detection.js       Hamming, CRC, checksum
+js/f1_team34_flow_control.js          ARQ simulator
+js/f1_team34_multiple_access.js       ALOHA / CSMA simulator
+js/f1_team34_tcp_congestion.js        Tahoe, Reno, bottleneck model
+js/f1_team34_queuing_qos.js           queuing disciplines
+tests/f1_team34_tests*.js             automated tests
 docs/                                    notes
 ```
 
@@ -47,7 +47,7 @@ Each `js` file keeps its calculations separate from its screen code, so the same
 Needs Node 16 or newer. No packages to install.
 
 ```
-node tests/f1_24BCT0309_tests.js
+node tests/f1_team34_tests.js
 ```
 
 The tests check, among other things, that simulated ALOHA and CSMA throughput match the textbook formulas,

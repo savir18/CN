@@ -3,7 +3,7 @@
    Shared by every tab: random numbers, tiny DOM helpers, form widgets,
    the tab registry, the hash router and the light/dark theme switch.
    Written as plain browser JavaScript (no modules, no build step) so the
-   project runs by double-clicking f1_24BCT0309_index.html.
+   project runs by double-clicking f1_team34_index.html.
    ========================================================================== */
 (function (root) {
   'use strict';
@@ -293,7 +293,7 @@
     CN.clear(rail);
     rail.appendChild(h('div', { class: 'brand' },
       h('div', { class: 'brand-name' }, 'Protocol Lab'),
-      h('div', { class: 'brand-sub' }, 'Computer Networks project, 24BCT0309')));
+      h('div', { class: 'brand-sub' }, 'Computer Networks project, team34')));
 
     let groupKey = null;
     let groupEl = null;
