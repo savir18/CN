@@ -130,7 +130,7 @@
       const yLabelW = Math.max(...yt.ticks.map((t) => ctx.measureText(yf(t)).width), 10);
 
       // direct labels at line ends (only when 2..4 series, as recommended for readability)
-      const useDirect = list.length >= 2 && list.length <= 4 && cfg.directLabels !== false && W > 520;
+      const useDirect = list.length >= 2 && list.length <= 4 && cfg.directLabels !== false && W > 520 && !list.some((s) => s.noLegend);
       const directW = useDirect ? Math.min(130, Math.max(...list.map((s) => ctx.measureText(s.name).width)) + 14) : 0;
 
       const m = {
@@ -341,10 +341,11 @@
     /* ---------- legend + table ---------- */
     function buildLegend() {
       CN.clear(legend);
-      const many = cfg.series.length >= 2;
+      const listed = cfg.series.filter((s) => !s.noLegend);
+      const many = listed.length >= 2;
       legend.style.display = many ? '' : 'none';
       if (!many) return;
-      cfg.series.forEach((s) => {
+      listed.forEach((s) => {
         const color = resolveColor(s.color);
         const isDot = s.type === 'scatter';
         const sw = h('span', { class: 'sw' + (isDot ? ' dot' : (s.dash ? ' dash' : '')), style: (isDot ? 'background:' : 'border-color:') + color });
