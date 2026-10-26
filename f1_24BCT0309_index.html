@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Protocol Lab | Computer Networks</title>
+  <meta name="description" content="Interactive simulations of data link and transport layer protocols: error detection, flow control, multiple access, TCP congestion control and queuing.">
+
+  <!-- Pick the saved theme (or the system one) before the page paints, to avoid a flash. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('cn-theme'); } catch (e) {}
+      if (!t) t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- Chivo is optional: if the fonts cannot load (offline), the page falls back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;700;800&family=Chivo+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="css/f1_24BCT0309_styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="rail" id="rail" aria-label="Protocol Lab sections"></aside>
+    <main class="main" id="main"></main>
+  </div>
+
+  <noscript>Protocol Lab needs JavaScript to run the simulations.</noscript>
+
+  <!-- shared helpers first, then one file per tab -->
+  <script src="js/f1_24BCT0309_core.js"></script>
+  <script src="js/f1_24BCT0309_charts.js"></script>
+  <script src="js/f1_24BCT0309_overview.js"></script>
+  <script src="js/f1_24BCT0309_error_detection.js"></script>
+  <script src="js/f1_24BCT0309_flow_control.js"></script>
+  <script src="js/f1_24BCT0309_multiple_access.js"></script>
+  <script src="js/f1_24BCT0309_tcp_congestion.js"></script>
+  <script src="js/f1_24BCT0309_queuing_qos.js"></script>
+  <script>CN.start();</script>
+</body>
+</html>
