@@ -312,6 +312,7 @@ input[aria-invalid="true"] { border-color: var(--bad); }
 .tbl th { font-weight: 700; color: var(--ink-2); font-size: 12.5px; border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
 .tbl tr.ok td:first-child { box-shadow: inset 3px 0 0 var(--good); }
 .tbl tr.fail td:first-child { box-shadow: inset 3px 0 0 var(--bad); }
+.tbl tr.sel td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
 .tbl .num { text-align: right; }
 .scroll-x { overflow-x: auto; }
 
