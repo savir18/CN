@@ -176,10 +176,10 @@
       const disc = CN.segmented({ label: 'Queuing rule', options: Object.keys(Q.DISCIPLINES).map((k) => ({ value: k, label: Q.DISCIPLINES[k] })), value: 'fifo', onChange: refresh });
       const cap = CN.slider({ label: 'Link speed', min: 0.5, max: 5, step: 0.5, value: 1, format: (v) => v + ' Mbps', onInput: refresh });
       const load = CN.slider({ label: 'Data traffic (web + bulk)', min: 20, max: 140, step: 5, value: 90, format: (v) => v + '% of link', onInput: refresh, hint: 'Above 100% the router is overloaded and must drop packets.' });
-      const burst = CN.slider({ label: 'Burst length of bulk transfer', min: 0.1, max: 1, step: 0.1, value: 0.3, format: (v) => v.toFixed(1) + ' s on / off', onInput: refresh, hint: 'Longer bursts build longer queues.' });
+      const burst = CN.slider({ label: 'Bulk burst length', min: 0.1, max: 1, step: 0.1, value: 0.3, format: (v) => v.toFixed(1) + ' s', onInput: refresh, hint: 'The bulk transfer sends for this long, then pauses for the same time. Longer bursts build longer queues.' });
       const buf = CN.slider({ label: 'Buffer per queue', min: 10, max: 200, step: 10, value: 50, format: (v) => v + ' packets', onInput: refresh });
       const wv = CN.slider({ label: 'WFQ: share reserved for VoIP', min: 5, max: 50, step: 5, value: 25, format: (v) => v + '%', onInput: refresh, hint: 'Only used by weighted fair queuing.' });
-      const propag = CN.slider({ label: 'Propagation + coding delay added', min: 0, max: 120, step: 10, value: 60, format: (v) => v + ' ms', onInput: refresh, hint: 'Added to queueing delay when judging the call.' });
+      const propag = CN.slider({ label: 'Extra path delay', min: 0, max: 120, step: 10, value: 60, format: (v) => v + ' ms', onInput: refresh, hint: 'Propagation and coding delay on the rest of the path. Added to the queueing delay when judging the call.' });
       const dur = CN.slider({ label: 'Run length', min: 10, max: 60, step: 10, value: 30, format: (v) => v + ' s', onInput: refresh });
       const seed = CN.textField({ label: 'Random seed', value: '2', mono: true, onInput: refresh });
 

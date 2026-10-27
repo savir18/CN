@@ -222,21 +222,14 @@
     return h('details', { class: 'theory' }, h('summary', null, title), h('div', { class: 'body', html: htmlBody }));
   };
 
-  /* Standard header for each page. units = [{unit, name, co, level}], topics = syllabus topic strings. */
+  /* Standard header for each page. units = [{unit, name}], topics = syllabus topic strings. */
   CN.pageHead = function (o) {
-    const chips = [];
-    (o.units || []).forEach((u) => {
-      chips.push(h('span', { class: 'chip strong' }, 'Unit ' + u.unit + ': ' + u.name));
-      chips.push(h('span', { class: 'chip' }, 'CO ' + u.co));
-      chips.push(h('span', { class: 'chip' }, u.level));
-    });
+    const u = (o.units || []).map((x) => 'Unit ' + x.unit + ', ' + x.name).join('; ');
+    const t = o.topics && o.topics.length ? ' Covers ' + o.topics.join(', ').replace(/, ([^,]*)$/, ' and $1') + '.' : '';
     return h('header', { class: 'page-head' },
       h('h1', null, o.title),
       h('p', { class: 'lead' }, o.lead),
-      h('div', { class: 'chips' }, chips),
-      o.topics && o.topics.length
-        ? h('div', { class: 'chips', style: 'margin-top:8px' }, o.topics.map((t) => h('span', { class: 'chip' }, t)))
-        : null);
+      u ? h('p', { class: 'syl' }, h('b', null, 'Syllabus: '), u + '.' + t) : null);
   };
 
   /* ------------------------------------------------------------------

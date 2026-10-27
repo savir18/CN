@@ -330,7 +330,7 @@
 
       const infoBox = h('div', { class: 'note' });
       const controls = h('div', { class: 'controls' },
-        h('h3', null, 'Protocol'), proto.el, pSlider.el,
+        h('h3', null, 'Channel rule'), proto.el, pSlider.el,
         h('h3', null, 'Traffic'), stations.el, load.el,
         h('div', { class: 'field' }, h('span', { class: 'field-label' }, 'Channel length'), aSel.el,
           h('span', { class: 'field-hint' }, 'a = propagation delay / frame time. Longer wires make carrier sensing less reliable.')),

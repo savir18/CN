@@ -199,7 +199,8 @@
         ctx.restore();
       }
 
-      // reference lines
+      // reference lines (their text labels are drawn after the series so data never covers them)
+      const deferred = [];
       ctx.save();
       ctx.beginPath(); ctx.rect(m.l, m.t, pw, ph); ctx.clip();
       (cfg.vlines || []).forEach((l) => {
@@ -208,20 +209,26 @@
         ctx.strokeStyle = resolveColor(l.color || 'ink-3'); ctx.setLineDash(l.dash || [4, 4]); ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.moveTo(x, m.t); ctx.lineTo(x, m.t + ph); ctx.stroke();
         ctx.setLineDash([]);
-        if (l.label) {
-          ctx.fillStyle = ink2; ctx.textAlign = 'left'; ctx.textBaseline = 'bottom'; ctx.font = font;
-          ctx.fillText(l.label, x + 4, m.t + ph - 4);
-        }
+        if (l.label) deferred.push(() => {
+          ctx.font = font; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+          const tw = ctx.measureText(l.label).width;
+          const tx = x + 5 + tw + 6 > m.l + pw ? x - 5 - tw - 6 : x + 5;
+          ctx.fillStyle = withAlpha(surface, 0.9); ctx.fillRect(tx - 2, m.t + 3, tw + 6, 16);
+          ctx.fillStyle = ink2; ctx.fillText(l.label, tx + 1, m.t + 6);
+        });
       });
       (cfg.hlines || []).forEach((l) => {
         const y = Math.round(Y(l.y)) + 0.5;
         ctx.strokeStyle = resolveColor(l.color || 'ink-3'); ctx.setLineDash(l.dash || [4, 4]); ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.moveTo(m.l, y); ctx.lineTo(m.l + pw, y); ctx.stroke();
         ctx.setLineDash([]);
-        if (l.label) {
-          ctx.fillStyle = ink2; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom'; ctx.font = font;
-          ctx.fillText(l.label, m.l + pw - 4, y - 3);
-        }
+        if (l.label) deferred.push(() => {
+          ctx.font = font; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+          const tw = ctx.measureText(l.label).width;
+          const below = y - 20 < m.t; const top = below ? y + 4 : y - 20;
+          ctx.fillStyle = withAlpha(surface, 0.9); ctx.fillRect(m.l + pw - tw - 10, top, tw + 8, 16);
+          ctx.fillStyle = ink2; ctx.fillText(l.label, m.l + pw - 6, top + 15);
+        });
       });
       ctx.restore();
 
@@ -273,6 +280,8 @@
         const lastP = pts[pts.length - 1];
         ends.push({ name: s.name, y: Y(lastP[1]), color });
       });
+
+      ctx.save(); ctx.beginPath(); ctx.rect(m.l, m.t, pw, ph); ctx.clip(); deferred.forEach((f) => f()); ctx.restore();
 
       // direct labels with simple collision avoidance
       if (useDirect) {

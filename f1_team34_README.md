@@ -18,8 +18,7 @@ Fonts load from Google Fonts when online and fall back to system fonts otherwise
 | TCP congestion | Unit 6 | Tahoe and Reno window lab; shared bottleneck with drop-tail or RED, fairness |
 | Queuing and QoS | Unit 6 | FIFO, priority, WFQ; delay, jitter, loss, throughput for a voice call |
 
-Units 1, 2, 4, 5 and 7 have no lab. The Overview page shows the full coverage table, and
-`docs/f1_team34_syllabus_mapping.md` repeats it with the model assumptions.
+Units 1, 2, 4, 5 and 7 have no lab. `docs/f1_team34_syllabus_mapping.md` lists what is covered and the model assumptions.
 
 ## Files
 
@@ -56,5 +55,5 @@ losses, and that priority queuing protects voice traffic.
 
 ## Known limits
 
-- The visuals were checked by loading every page in a simulated browser and exercising the controls, not by looking at screenshots in a real browser. Open each tab once and report anything that looks off.
+- Pages were checked in headless Chromium (light, dark and phone width) and in a simulated browser, not on every real device. Report anything that looks off.
 - The congestion and queuing labs are simplified models (a round-based window model, a fluid-flow bottleneck, a packet-level port), meant for understanding, not for measuring real networks.
