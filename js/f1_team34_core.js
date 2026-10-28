@@ -111,7 +111,11 @@
     const out = h('output', null);
     const input = h('input', { type: 'range', min: o.min, max: o.max, step: o.step || 1, value: o.value, 'aria-label': o.label });
     const fmt = o.format || ((v) => String(v));
-    const update = () => { out.textContent = fmt(Number(input.value)); };
+    const update = () => {
+      out.textContent = fmt(Number(input.value));
+      const lo = Number(input.min); const hi = Number(input.max);
+      input.style.setProperty('--pct', (hi > lo ? ((Number(input.value) - lo) / (hi - lo)) * 100 : 0) + '%');
+    };
     input.addEventListener('input', () => { update(); if (o.onInput) o.onInput(Number(input.value)); });
     update();
     const el = h('label', { class: 'field' },
@@ -284,9 +288,14 @@
   function buildRail() {
     const rail = document.getElementById('rail');
     CN.clear(rail);
-    rail.appendChild(h('div', { class: 'brand' },
-      h('div', { class: 'brand-name' }, 'Protocol Lab'),
-      h('div', { class: 'brand-sub' }, 'Computer Networks project, team34')));
+    const mark = h('svg', { class: 'brand-mark', viewBox: '0 0 30 30', 'aria-hidden': 'true' },
+      h('rect', { x: 3, y: 4, width: 24, height: 5, rx: 2, fill: '#6da7ec' }),
+      h('rect', { x: 3, y: 12.5, width: 24, height: 5, rx: 2, fill: '#ffffff', opacity: 0.85 }),
+      h('rect', { x: 3, y: 21, width: 24, height: 5, rx: 2, fill: '#6da7ec', opacity: 0.55 }));
+    rail.appendChild(h('div', { class: 'brand' }, mark,
+      h('div', { class: 'brand-text' },
+        h('div', { class: 'brand-name' }, 'Protocol Lab'),
+        h('div', { class: 'brand-sub' }, 'Team 34 project'))));
 
     let groupKey = null;
     let groupEl = null;
