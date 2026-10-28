@@ -94,6 +94,17 @@
       rows.forEach((r, i) => r.forEach(([x, w, c]) => add(h('rect', { x, y: 10 + i * 17, width: w, height: 12, rx: 2, fill: c === 'g' ? 'var(--s3)' : 'var(--bad)' }))));
     } else if (kind === 'tcp') {
       add(h('polyline', { points: '8,54 20,48 32,38 44,26 56,14 58,34 70,31 82,27 94,23 106,19 118,15 120,34 132,30 144,26 156,22 168,18 180,14', fill: 'none', stroke: 'var(--s2)', 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
+    } else if (kind === 'journey') {
+      [['var(--s2)', 0, 200], ['var(--s1)', 1, 172], ['var(--s3)', 2, 144], ['var(--s5, #7a5af8)', 3, 116]].forEach(([c, i, w]) => add(h('rect', { x: (200 - w) / 2, y: 8 + i * 13.5, width: w, height: 11, rx: 2, fill: c })));
+    } else if (kind === 'subnet') {
+      for (let i = 0; i < 16; i++) {
+        const net = i < 10;
+        add(h('rect', { x: 10 + (i % 8) * 23.5 + (i % 8 > 3 ? 4 : 0), y: i < 8 ? 12 : 36, width: 20, height: 18, rx: 2, fill: net ? 'var(--s1)' : 'var(--surface)', stroke: net ? 'var(--s1)' : 'var(--rule-strong)' }));
+      }
+    } else if (kind === 'routing') {
+      const pts = [[24, 32], [74, 12], [74, 52], [130, 12], [130, 52], [180, 32]];
+      [[0, 1], [0, 2], [1, 3], [2, 4], [1, 2], [3, 5], [4, 5], [3, 4]].forEach(([a, b], i) => add(h('line', { x1: pts[a][0], y1: pts[a][1], x2: pts[b][0], y2: pts[b][1], stroke: [0, 1, 3, 6].includes(i) ? 'var(--accent)' : 'var(--ink-3)', 'stroke-width': [0, 1, 3, 6].includes(i) ? 3 : 1.5, opacity: 0.8 })));
+      pts.forEach(([x, y]) => add(h('circle', { cx: x, cy: y, r: 6, fill: 'var(--surface)', stroke: 'var(--ink-2)', 'stroke-width': 2 })));
     } else if (kind === 'qos') {
       [[14, 150, 'var(--s2)'], [26, 110, 'var(--s1)'], [38, 170, 'var(--s3)']].forEach(([y, w, c], i) => {
         add(h('rect', { x: 12, y, width: 176, height: 8, rx: 2, fill: 'var(--rule)' }));
@@ -104,17 +115,23 @@
   }
 
   const LABS = [
+    ['journey', 'journey', 'Packet journey', 'Follow one web request through TCP, IP and Ethernet across two routers, then compare circuit and packet switching.'],
     ['errors', 'errors', 'Error detection and correction', 'Encode a message, flip bits, and watch Hamming, CRC and checksum catch (or miss) the damage.'],
     ['flow', 'flow', 'Flow control', 'Stop-and-Wait, Go-Back-N and Selective Repeat on a link that loses frames.'],
     ['access', 'access', 'Multiple access', 'Stations fight over one wire: ALOHA, slotted ALOHA, CSMA and CSMA/CD.'],
+    ['subnet', 'subnet', 'Subnetting', 'Masks, network and broadcast addresses, VLSM planning and route summarisation, with the bits shown.'],
+    ['routing', 'routing', 'Routing protocols', 'Dijkstra and distance vector on a network you can break, including count to infinity.'],
     ['tcp', 'tcp', 'TCP congestion control', 'Tahoe and Reno windows, and flows sharing a router with drop-tail or RED.'],
     ['qos', 'qos', 'Queuing and QoS', 'FIFO, priority and WFQ: what a phone call feels while a download runs.'],
   ];
 
   const TRY = [
+    ['journey', 'Set the TTL to 2', 'and watch the packet die at the second router.'],
     ['errors', 'Flip two bits in a Hamming codeword', 'and see why one-bit repair fails on a double error.'],
     ['flow', 'Lose frame 2 under Go-Back-N', 'then switch to Selective Repeat and compare what gets resent.'],
     ['access', 'Raise the traffic until ALOHA collapses', 'then try CSMA/CD on the same load.'],
+    ['subnet', 'Plan a /24 for 100, 50, 20 and 2 hosts', 'using VLSM, and see how little space is left.'],
+    ['routing', 'Break link B\u2013C on the three-router line', 'with no fix, then with split horizon.'],
     ['tcp', 'Add a timeout at round 12', 'and compare how Tahoe and Reno recover.'],
     ['qos', 'Push data traffic to 100%', 'and watch FIFO ruin the call while priority protects it.'],
   ];
@@ -131,7 +148,7 @@
           h('h1', null, 'Watch network protocols work, then break them.'),
           h('p', { class: 'lead' }, 'Flip bits, drop frames, crowd a wire and flood a router. Each lab lets you change the conditions and shows exactly how the protocol reacts.'),
           h('div', { class: 'row' },
-            h('a', { class: 'btn primary', href: '#errors' }, 'Start with error detection'),
+            h('a', { class: 'btn primary', href: '#journey' }, 'Follow a packet'),
             h('a', { class: 'btn', href: '#tcp' }, 'Jump to TCP congestion'))),
         buildHero(loops)));
 

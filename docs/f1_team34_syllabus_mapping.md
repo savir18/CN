@@ -4,8 +4,8 @@
 
 | Unit | Topic | Where | Status |
 |---|---|---|---|
-| 1 | Layered architecture | Menu grouped by layer; each lab names its layer | Context only |
-| 2 | Circuit and packet switching | Queueing delay and loss in the Queuing and QoS lab | Context only |
+| 1 | Layered architecture, encapsulation | Packet journey lab; the menu is also grouped by layer | Live |
+| 2 | Circuit and packet switching | Packet journey lab (Circuit or packet? mode) | Live |
 | 3 | Hamming code | Error detection lab | Live |
 | 3 | CRC, checksum | Error detection lab | Live |
 | 3 | Stop-and-Wait | Flow control lab | Live |
@@ -13,8 +13,10 @@
 | 3 | ALOHA, slotted ALOHA, CSMA, CSMA/CD | Multiple access lab | Live |
 | 3 | IEEE 802.3 | Through CSMA/CD | Partial |
 | 3 | IEEE 802.11 | CSMA/CA not simulated | Theory only |
-| 4 | Network layer | none | Not covered |
-| 5 | Routing protocols | none | Not covered |
+| 4 | IP addressing, subnetting, VLSM, route summarisation | Subnetting lab | Live |
+| 4 | IP header, TTL, forwarding | Packet journey lab | Partial |
+| 5 | Link state (Dijkstra), distance vector, count to infinity | Routing lab | Live |
+| 5 | OSPF, RIP, BGP as protocols | Algorithms only, no protocol messages | Partial |
 | 6 | TCP and UDP | Window behaviour only | Partial |
 | 6 | Congestion control, traffic management, congestion avoidance | TCP congestion lab | Live |
 | 6 | Queuing mechanisms, QoS parameters | Queuing and QoS lab | Live |
@@ -44,3 +46,14 @@ A drop makes a flow react one round trip later, then ignore further drops for on
 **Queuing.** Packet-by-packet single output port. VoIP: 200 B every 20 ms. Web: Poisson, 500 B. Bulk: on/off bursts, 1500 B.
 WFQ uses the self-clocked approximation (finish tag = max(virtual time, last tag) + size / weight).
 A call counts as good if the 95th percentile delay (plus the propagation allowance) is under 150 ms, jitter under 30 ms and loss under 1%.
+
+**Packet journey.** One segment of up to 1460 bytes. Headers are built byte by byte: TCP 20 B (checksum over the pseudo-header), IPv4 20 B (DF set, header checksum), Ethernet 14 B plus a 4 B CRC-32 trailer, so overhead is 58 B.
+Each router checks the FCS, lowers the TTL, recomputes the IP checksum and builds a new frame with new MAC addresses. A TTL that reaches 0 is dropped.
+Switching delay: circuit = set-up + M/R + propagation; packets = (N + P - 2) full packet times + the last packet + propagation, with P packets over N links (a single packet takes N times its own transmission time).
+Sharing uses the binomial tail P(X > m) for n users who are each active with probability p, where m = link rate / user rate.
+
+**Subnetting.** Addresses are unsigned 32-bit integers. Network = address AND mask; broadcast = network OR NOT mask. Usable hosts are 2^(32-p) - 2, except /31 (2, RFC 3021) and /32 (1).
+VLSM allocates the largest requirement first, each rounded up to a power of two (plus 2 for network and broadcast), on aligned boundaries. Summarisation finds the longest common prefix and reports any gap.
+
+**Routing.** Link state: Dijkstra with a step trace. Distance vector: synchronous Bellman-Ford rounds, where every router recomputes from its neighbours' previous tables. Infinity is 32 here (RIP uses 16) because the example costs reach 20.
+Split horizon hides a route from the neighbour it was learned from; poison reverse advertises it back as infinity.

@@ -316,10 +316,10 @@
       linksEl.appendChild(h('a', { class: 'nav-link', href: '#' + t.id, 'data-tab': t.id }, t.title));
     });
 
-    const themeBtn = CN.button(CN.getTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme', {
+    const themeBtn = CN.button(CN.getTheme() === 'dark' ? 'Light theme' : 'Dark theme', {
       onClick: () => CN.setTheme(CN.getTheme() === 'dark' ? 'light' : 'dark'),
     });
-    CN.onThemeChange((th) => { themeBtn.textContent = th === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'; });
+    CN.onThemeChange((th) => { themeBtn.textContent = th === 'dark' ? 'Light theme' : 'Dark theme'; });
     rail.appendChild(h('div', { class: 'rail-foot' }, themeBtn));
   }
 

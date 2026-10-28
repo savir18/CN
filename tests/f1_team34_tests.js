@@ -181,7 +181,7 @@ test('Monte Carlo: parity never catches even-sized errors; CRC-16 catches every 
 
 /* ---------------------------------------------------------------------- */
 const extra = process.argv.slice(2); // allow: node tests/... flow mac tcp qos
-['flow_control', 'multiple_access', 'tcp_congestion', 'queuing_qos'].forEach((name) => {
+['flow_control', 'multiple_access', 'tcp_congestion', 'queuing_qos', 'subnetting', 'routing', 'journey'].forEach((name) => {
   const file = path.join(jsDir, 'f1_team34_' + name + '.js');
   if (require('fs').existsSync(file)) {
     console.log('\n' + name.replace('_', ' '));

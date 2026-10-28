@@ -12,13 +12,16 @@ Fonts load from Google Fonts when online and fall back to system fonts otherwise
 
 | Lab | Syllabus | What you can do |
 |---|---|---|
+| Packet journey | Units 1, 2 | Follow one web request through TCP, IP and Ethernet across two routers (TTL, MACs, checksums, CRC-32); circuit against packet switching delay; statistical multiplexing |
 | Error detection | Unit 3 | Hamming (SEC and SEC-DED), CRC with step-by-step division, internet checksum, Monte Carlo detection test |
 | Flow control | Unit 3 | Stop-and-Wait, Go-Back-N, Selective Repeat on a lossy link, space-time diagram, efficiency sweeps |
 | Multiple access | Unit 3 | Pure and slotted ALOHA, CSMA (1-persistent, non-persistent), CSMA/CD; throughput against load |
+| Subnetting | Unit 4 | Address calculator with bit view, equal and VLSM subnet planning, same-subnet test, route summarisation |
+| Routing | Unit 5 | Dijkstra step by step, distance vector round by round, break links, count to infinity, split horizon, poison reverse |
 | TCP congestion | Unit 6 | Tahoe and Reno window lab; shared bottleneck with drop-tail or RED, fairness |
 | Queuing and QoS | Unit 6 | FIFO, priority, WFQ; delay, jitter, loss, throughput for a voice call |
 
-Units 1, 2, 4, 5 and 7 have no lab. `docs/f1_team34_syllabus_mapping.md` lists what is covered and the model assumptions.
+Unit 7 (DNS, HTTP, FTP) has no lab yet. `docs/f1_team34_syllabus_mapping.md` lists what is covered and the model assumptions.
 
 ## Files
 
@@ -29,7 +32,10 @@ f1_team34_index.html                  page shell, loads everything
 css/f1_team34_styles.css              theme, layout
 js/f1_team34_core.js                  helpers, widgets, theme, router, random numbers
 js/f1_team34_charts.js                small canvas chart library
-js/f1_team34_overview.js              landing page and coverage table
+js/f1_team34_overview.js              landing page and lab cards
+js/f1_team34_journey.js               encapsulation, switching maths
+js/f1_team34_subnetting.js            IPv4 maths, VLSM, summarisation
+js/f1_team34_routing.js               Dijkstra and distance vector
 js/f1_team34_error_detection.js       Hamming, CRC, checksum
 js/f1_team34_flow_control.js          ARQ simulator
 js/f1_team34_multiple_access.js       ALOHA / CSMA simulator
@@ -50,7 +56,7 @@ node tests/f1_team34_tests.js
 ```
 
 The tests check, among other things, that simulated ALOHA and CSMA throughput match the textbook formulas,
-that every ARQ protocol delivers all frames in order despite random loss, that Reno beats Tahoe on the same
+that CRC-32 and the IP checksum match known values, that TTL and MACs change as they should along the path, that Dijkstra and distance vector agree on costs, that split horizon stops count to infinity, that VLSM plans tile the address space, that every ARQ protocol delivers all frames in order despite random loss, that Reno beats Tahoe on the same
 losses, and that priority queuing protects voice traffic.
 
 ## Known limits
