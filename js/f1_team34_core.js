@@ -299,18 +299,21 @@
 
     let groupKey = null;
     let groupEl = null;
+    let linksEl = null;
     CN.tabs.forEach((t) => {
       const key = t.group ? t.group.name : '';
       if (key !== groupKey) {
         groupKey = key;
-        groupEl = h('nav', { class: 'nav-group', 'aria-label': key || 'Overview' });
+        groupEl = h('nav', { class: 'nav-group' + (t.group ? '' : ' solo'), 'aria-label': key || 'Overview' });
+        linksEl = h('div', { class: 'nav-group-links' });
         if (t.group) {
           groupEl.appendChild(h('div', { class: 'nav-group-title' },
             h('b', null, 'Layer ' + t.group.layer), h('span', null, t.group.name)));
         }
+        groupEl.appendChild(linksEl);
         rail.appendChild(groupEl);
       }
-      groupEl.appendChild(h('a', { class: 'nav-link', href: '#' + t.id, 'data-tab': t.id }, t.title));
+      linksEl.appendChild(h('a', { class: 'nav-link', href: '#' + t.id, 'data-tab': t.id }, t.title));
     });
 
     const themeBtn = CN.button(CN.getTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme', {

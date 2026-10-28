@@ -107,7 +107,7 @@
       const rule = CN.cssVar('--rule');
       const ruleStrong = CN.cssVar('--rule-strong');
       const surface = CN.cssVar('--surface');
-      const font = '12px "Chivo", system-ui, sans-serif';
+      const font = '12px "IBM Plex Sans", system-ui, sans-serif';
 
       const list = visibleSeries();
       const ex = extents(list);

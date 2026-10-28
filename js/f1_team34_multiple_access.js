@@ -257,7 +257,7 @@
 
     const surface = CN.cssVar('--surface'); const ink = CN.cssVar('--ink'); const ink2 = CN.cssVar('--ink-2'); const ink3 = CN.cssVar('--ink-3');
     const rule = CN.cssVar('--rule'); const good = CN.cssVar('--good'); const bad = CN.cssVar('--bad'); const info = CN.cssVar('--s1'); const warn = CN.cssVar('--s4');
-    const font = '12px "Chivo", system-ui, sans-serif';
+    const font = '12px "IBM Plex Sans", system-ui, sans-serif';
     ctx.font = font;
 
     const plotW = W - labelW - 10;
@@ -285,7 +285,7 @@
     }
 
     // channel row (derived from the stations)
-    ctx.fillStyle = ink; ctx.textAlign = 'right'; ctx.font = '600 12px "Chivo", system-ui, sans-serif';
+    ctx.fillStyle = ink; ctx.textAlign = 'right'; ctx.font = '600 12px "IBM Plex Sans", system-ui, sans-serif';
     ctx.fillText('Channel', labelW - 8, headH + rowH / 2);
     ctx.font = font;
     for (let k = Math.max(0, kStart); k < kEnd; k++) {
