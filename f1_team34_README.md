@@ -47,6 +47,18 @@ docs/                                    notes
 
 Each `js` file keeps its calculations separate from its screen code, so the same logic runs in Node for testing.
 
+## Report, slides and results
+
+```
+docs/f1_team34_report.docx / .pdf              project report
+docs/f1_team34_presentation.pptx / .pdf        slides
+docs/f1_team34_assignment10_submission.pdf     submission sheet
+screenshots/                                    screenshots of every lab
+figures/                                        charts and architecture diagram
+scripts/f1_team34_experiments.js                30-seed experiments (node scripts/f1_team34_experiments.js)
+results/f1_team34_experiment_results.json       output of the experiments
+```
+
 ## Run the tests
 
 Needs Node 16 or newer. No packages to install.
