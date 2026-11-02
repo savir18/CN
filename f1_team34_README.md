@@ -54,6 +54,7 @@ docs/f1_team34_report.docx / .pdf              project report
 docs/f1_team34_presentation.pptx / .pdf        slides
 docs/f1_team34_assignment10_submission.pdf     submission sheet
 docs/f1_team34_presenter_guide.docx / .pdf      live-demo presenter guide
+docs/f1_team34_lab_walkthrough.pptx / .pdf      talk-along slides, one per lab
 screenshots/                                    screenshots of every lab
 figures/                                        charts and architecture diagram
 scripts/f1_team34_experiments.js                30-seed experiments (node scripts/f1_team34_experiments.js)
